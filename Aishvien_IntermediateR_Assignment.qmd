@@ -24,11 +24,11 @@ typeof(movies)
 
 #Questions 3-5a
 ```{r}
-# Creating a subset of the movies dataset called movies_final. Removed columns r1-r10
+# Question 3 Creating a subset of the movies dataset called movies_final. Removed columns r1-r10
 
 movies_final <- movies |> select(-c(r1,r2,r3,r4,r5,r6,r7,r8,r9,r10))
 
-# Created a singular genre column, removed films from genres that it did not belong to
+# Question 4a Created a singular genre column, removed films from genres that it did not belong to
 movies_final <- movies_final |>
   mutate(across(.cols = c(Action, Animation,Comedy,Drama,Documentary,Romance,Short),
  .fns = ~ ifelse(.x == 1, cur_column(), NA_character_)                                                   )) |>
@@ -44,6 +44,13 @@ movies_final <- movies_final |>
 #| merge them into a single string
 
 str(movies_final) # I used structure function to check if it worked, and it did!
+
+# Question 4b, Omitted missing values in genre column, split rows into unique film-genres 
+movies_genre_ratings <- movies_final |> 
+  filter(genre != "" & !is.na(genre)) |> 
+  tidyr::separate_longer_delim(genre, delim = ", ") |>
+  group_by(genre) |> summarise(mean_rating = mean(rating, na.rm = TRUE))
+# On average, Documentary, Animation, and Short films have the highest rating while Drama, Comedy, and action have the lowest rating
 
 
 ```
