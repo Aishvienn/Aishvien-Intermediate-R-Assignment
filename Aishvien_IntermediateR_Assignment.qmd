@@ -12,6 +12,7 @@ format: html
 
 library(ggplot2)
 library(dplyr)
+library(tidyr)
 
 movies <- ggplot2movies::movies
 
@@ -23,11 +24,26 @@ typeof(movies)
 
 #Questions 3-5a
 ```{r}
-# Creating a subset of the movies dataset. Removed columns r1-r10
+# Creating a subset of the movies dataset called movies_final. Removed columns r1-r10
 
 movies_final <- movies |> select(-c(r1,r2,r3,r4,r5,r6,r7,r8,r9,r10))
 
+# Created a singular genre column, removed films from genres that it did not belong to
+movies_final <- movies_final |>
+  mutate(across(.cols = c(Action, Animation,Comedy,Drama,Documentary,Romance,Short),
+ .fns = ~ ifelse(.x == 1, cur_column(), NA_character_)                                                   )) |>
+  unite(
+    col = "genre",
+    c(Action, Animation, Comedy, Drama, Documentary, Romance, Short),
+    sep = ", ",
+    na.rm = TRUE
+  )
+#| you need the tiydr package to use the unite function
+#| english translation of code above: take the genre columns and if the value inside the column is
+#| 1 take the name of the column. Then combine multiple columns under one column called "genre" and
+#| merge them into a single string
 
+str(movies_final) # I used structure function to check if it worked, and it did!
 
 
 ```
