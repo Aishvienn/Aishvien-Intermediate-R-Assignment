@@ -1,0 +1,33 @@
+---
+title: "Aishvien Nagendran_Intermediate_R_Assignment"
+format: html
+---
+
+## Part 1: R Basics & Tidyverse Essentials
+```{r}
+
+#| warning = FALSE
+
+#Saving the movies data set and inspecting it
+
+library(ggplot2)
+library(dplyr)
+
+movies <- ggplot2movies::movies
+
+str(movies)
+class(movies)
+typeof(movies)
+
+```
+
+#Questions 3-5a
+```{r}
+# Creating a subset of the movies dataset. Removed columns r1-r10
+
+movies_final <- movies |> select(-c(r1,r2,r3,r4,r5,r6,r7,r8,r9,r10))
+
+
+
+
+```
