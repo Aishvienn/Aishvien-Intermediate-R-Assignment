@@ -22,7 +22,7 @@ typeof(movies)
 
 ```
 
-#Questions 3-5a
+# Questions 3-4
 ```{r}
 # Question 3 Creating a subset of the movies dataset called movies_final. Removed columns r1-r10
 
@@ -54,3 +54,28 @@ movies_genre_ratings <- movies_final |>
 
 
 ```
+
+# Question 5a-5b
+```{r}
+#| label: fig-movies-year-rating
+
+movies_final |> ggplot(aes(x = year, y = rating)) + 
+  geom_point() +
+  theme_light() + 
+  labs(x = "Year", y = "Rating", title = "Film Year and Rating Graph")
+
+#| label: fig-movies-year-rating-line
+movies_final |> ggplot(aes(x = year, y = rating)) + 
+  geom_line() +
+  theme_light() + 
+  labs(x = "Year", y = "Rating", title = "Film Year and Rating Graph")
+
+#| label: fig-movies-year-mpaa
+movies_final |> ggplot(aes(x = year, y = rating, color = mpaa )) + 
+  geom_point() +
+  theme_light() + 
+  labs(x = "Year", y = "Rating", title = "Film Year and Rating Graph")
+#| There seems to be missing data in the mpaa section
+
+```
+
