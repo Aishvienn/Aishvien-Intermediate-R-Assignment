@@ -102,7 +102,7 @@ roll_dice2 <- function(d = 20, num_rolls) {
   return(rolls)
 }
 
-roll_dice2(10,100)
+rolls <- roll_dice2(10,100)
 ```
 
 # Question 7-8b
@@ -121,8 +121,15 @@ print(num_sols(1,10,2))
 
 
 #Question 7b
+quad_solve <- function(a, b, c){
+  discriminant <- b^2 - 4*a*c
+if (discriminant < 0) return("There are no real solutions")
+if (a == 0) return("Value error: Input a non-zero integer")
+ else return((quadratic <- -b + sqrt(b^2 - 4*a*c)))
 
-
+ 
+}
+print(quad_solve(1,10,2))
 ```
 
 
