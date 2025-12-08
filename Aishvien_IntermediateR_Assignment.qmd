@@ -83,12 +83,21 @@ movies_final |> ggplot(aes(x = year, y = rating, color = mpaa )) +
 
 ## Part 2: Functions, Iterations, and Debugging
 ```{r}
-# Question 6a Creating a Dice Roll Function
+# Question 6a Creating a Roll Dice Function
+
+install.packages("glue")
 
 roll_dice <- function(d = 20, num_rolls)
    return (sample(1:d, num_rolls, replace = TRUE))
   
 print(roll_dice(10, 2))
+
+#Question 6b, modifying Roll Dice Function
+roll_dice2 <- function(d = 20, num_rolls)
+   return (sample(1:d, num_rolls, replace = TRUE))     
+
+
+print(glue:glue("You rolled {num_rolls} d{d} dice:"))
 ```
 
 
