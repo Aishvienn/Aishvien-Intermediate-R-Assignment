@@ -94,15 +94,35 @@ print(roll_dice(10, 2))
 
 #Question 6b, modifying Roll Dice Function
 roll_dice2 <- function(d = 20, num_rolls) {
-   rolls <- sample(1:d, num_rolls, replace = TRUE)
-  print(glue("You rolled {num_rolls} d{d} dice: {paste(rolls, collapse = ', ')}. Sum: {sum(rolls)}"))
-if(d < 0 ) warning("Please input a positive integer")
-if(num_rolls < 0) warning("Please input a positive integer")
   
+  if(d < 0 ) warning("Value Error: Please input a positive integer")
+  if(num_rolls < 0) warning("Value Error: Please input a positive integer")
+  rolls <- sample(1:d, num_rolls, replace = TRUE)
+  print(glue("You rolled a {num_rolls} d{d} dice: {paste(rolls, collapse = ', ')}. Sum: {sum(rolls)}"))
   return(rolls)
 }
 
-print(roll_dice2(10,2))
+roll_dice2(10,100)
+```
+
+# Question 7-8b
+```{r}
+
+#Question 7a
+num_sols <- function(a, b, c) {
+  discriminant <- b^2 - 4*a*c
+if (discriminant < 0) return("There are no real solutions")
+if (discriminant == 0) return("There is one real solution")
+if (discriminant > 0) return("There are two real solutions")
+
+  
+}
+print(num_sols(1,10,2))
+
+
+#Question 7b
+
+
 ```
 
 
