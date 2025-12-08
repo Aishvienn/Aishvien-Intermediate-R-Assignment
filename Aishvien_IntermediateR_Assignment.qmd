@@ -85,7 +85,7 @@ movies_final |> ggplot(aes(x = year, y = rating, color = mpaa )) +
 ```{r}
 # Question 6a Creating a Roll Dice Function
 
-install.packages("glue")
+library(glue)
 
 roll_dice <- function(d = 20, num_rolls)
    return (sample(1:d, num_rolls, replace = TRUE))
@@ -93,11 +93,16 @@ roll_dice <- function(d = 20, num_rolls)
 print(roll_dice(10, 2))
 
 #Question 6b, modifying Roll Dice Function
-roll_dice2 <- function(d = 20, num_rolls)
-   return (sample(1:d, num_rolls, replace = TRUE))     
+roll_dice2 <- function(d = 20, num_rolls) {
+   rolls <- sample(1:d, num_rolls, replace = TRUE)
+  print(glue("You rolled {num_rolls} d{d} dice: {paste(rolls, collapse = ', ')}. Sum: {sum(rolls)}"))
+if(d < 0 ) warning("Please input a positive integer")
+if(num_rolls < 0) warning("Please input a positive integer")
+  
+  return(rolls)
+}
 
-
-print(glue:glue("You rolled {num_rolls} d{d} dice:"))
+print(roll_dice2(10,2))
 ```
 
 
