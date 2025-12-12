@@ -136,9 +136,27 @@ return(c(root1 = plus_squarer, root2 = minus_squarer))
 print(quad_solve(1,10,2))
 
 
+#Question 8a
+collatz <- function(n) {
+  steps <- 1
+  while (n > 2) {         # I realized that the while condition had to be n < 2 for collatz(2) to work
+    if (n %% 2 == 0) {
+      n <- n / 2
+    } else {
+      n <- 3*n + 1
+    }
+    steps <- steps + 1
+  }
+  steps
+}
+
+collatz(37) #Returns 21
+
+
+
 
 
 
 ```
-
+  
 
