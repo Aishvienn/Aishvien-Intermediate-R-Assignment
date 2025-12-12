@@ -124,12 +124,21 @@ print(num_sols(1,10,2))
 quad_solve <- function(a, b, c){
   discriminant <- b^2 - 4*a*c
 if (discriminant < 0) return("There are no real solutions")
-if (a == 0) return("Value error: Input a non-zero integer")
- else return((quadratic <- -b + sqrt(b^2 - 4*a*c)))
+if (a == 0) stop("Value error: Input a non-zero integer")
+  
+plus_squarer <-  (-b + sqrt(discriminant)/ 2*a) #Had to create the minus and plus sign since R has no operator
+minus_squarer <- (-b - sqrt(discriminant)/ 2*a)
+  
+return(c(root1 = plus_squarer, root2 = minus_squarer))
 
  
 }
 print(quad_solve(1,10,2))
+
+
+
+
+
 ```
 
 
