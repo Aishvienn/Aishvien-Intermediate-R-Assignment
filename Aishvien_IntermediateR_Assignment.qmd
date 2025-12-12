@@ -1,14 +1,16 @@
 ---
 title: "Aishvien Nagendran_Intermediate_R_Assignment"
 format: html
+theme: yeti
 ---
 
 ## Part 1: R Basics & Tidyverse Essentials
 ```{r}
 
-#| warning = FALSE
+
 
 #Saving the movies data set and inspecting it
+#| warning: FALSE
 
 library(ggplot2)
 library(dplyr)
@@ -42,6 +44,7 @@ movies_final <- movies_final |>
 #| english translation of code above: take the genre columns and if the value inside the column is
 #| 1 take the name of the column. Then combine multiple columns under one column called "genre" and
 #| merge them into a single string
+
 
 str(movies_final) # I used structure function to check if it worked, and it did!
 
@@ -85,6 +88,7 @@ movies_final |> ggplot(aes(x = year, y = rating, color = mpaa )) +
 ```{r}
 # Question 6a Creating a Roll Dice Function
 
+#| warning: False
 library(glue)
 
 roll_dice <- function(d = 20, num_rolls)
@@ -154,17 +158,19 @@ collatz(37) #Returns 21
 
 # Question 8b
 collatz_steps <- function(n) {
-  steps <- 1
-  while (n > 2) {         
+  steps_seq <- c(n)
+  while (n > 2) {          
     if (n %% 2 == 0) {
       n <- n / 2
     } else {
       n <- 3*n + 1
     }
-    steps <- steps + 1
-    steps <- c(n, steps) # need to fix list, doesnt make sense
+    steps_seq <- c(steps_seq, n)
+  
   }
-  return(list(steps = steps))
+ steps <- length(steps_seq) + 1 
+  return(list(steps = steps,
+              steps_seq = steps_seq))
 }
 
 collatz_steps(37)
@@ -193,6 +199,7 @@ apply(scores, 2, mean) #calculate average score for each subject
 
 
 #Question 10
+#| eval: false
 average_all <- function(x, y, z) {
 combined <- c(x, y, z)
 clean <- na.omit(combined)
@@ -219,13 +226,11 @@ traceback() #The function doesn't help because there isn't technically any actua
 debug(average_all)
 average_all(x, y, z)
 
-#|using the debug function, the issue seems to be at line 206 when the average is being calculated
-#|My guess is that when you divide vectors of different lengths that are not a multiple of each other it results in a error
-#|for example the length of clean is 8, and n is 3 which also means that 3 is not a mutiple of 8
-#| also another issue is that the value of n is "4L", not sure if that is correct
 
 
-#Fixed Codee
+
+#Fixed Code
+#| eval: TRUE
 average_all <- function(x, y, z) {
 combined <- c(x, y, z)
 clean <- na.omit(combined)
@@ -239,11 +244,16 @@ n <- length(cleam)
 mean_val <- total / n
 return(mean_val)
 }
-#| To fix the code, replace n<-length(x,y,z) with n<-length(clean)
-#| We were initially using the old vectors containing the NAs and when we added the vectors it contained NA's, which resulted in errors.
+
 
 
 
 
 ```
+Using the debug function, the issue seems to be at line 206 when the average is being calculated.
+My guess is that when you divide vectors of different lengths that are not a multiple of each other it results in a error. For example the length of clean is 8, and n is 3 which also means that 3 is not a multiple of 8. Also another issue is that the value of n is "4L", not sure if that is correct.
 
+
+
+To fix the code, replace n<-length(x,y,z) with n<-length(clean).
+We were initially using the old vectors containing the NAs and when we added the vectors it contained NA's, which resulted in errors.
